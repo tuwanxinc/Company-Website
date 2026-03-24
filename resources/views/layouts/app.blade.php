@@ -6,23 +6,8 @@
     <title>@yield('title', 'Tuwanx - Custom Fashion Marketplace')</title>
     <!-- Add favicon -->
     <link rel="icon" type="image/jpg" href="{{ asset('assets/favicon.jpg') }}">
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'tuwanx-gold': '#D4AF37',
-                        'tuwanx-black': '#00171F',
-                    },
-                    screens: {
-                        'xs': '475px',
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         

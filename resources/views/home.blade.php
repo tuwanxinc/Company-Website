@@ -79,6 +79,60 @@
         </div>
     </section>
     
+    <!-- Section 1.5: Download Charts -->
+    <section class="section bg-white py-20 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col items-center justify-center fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 md:mb-20">Growing <span class="text-gradient">Community</span></h2>
+                
+                <div class="w-full max-w-4xl relative mx-auto">
+                    <!-- Venn Diagram SVG Background -->
+                    <div class="w-full aspect-[2/1] md:aspect-[2.2/1] relative">
+                        <svg viewBox="0 0 600 320" class="w-full h-full drop-shadow-xl" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                                <clipPath id="circleLeftClip">
+                                    <circle cx="210" cy="160" r="150" />
+                                </clipPath>
+                            </defs>
+                            
+                            <!-- Left Circle (Black) -->
+                            <circle cx="210" cy="160" r="150" fill="#00171F" />
+                            
+                            <!-- Right Circle (Gold) -->
+                            <circle cx="390" cy="160" r="150" fill="#D4AF37" />
+                            
+                            <!-- Intersection (White) - Created by clipping Right Circle with Left Circle -->
+                            <circle cx="390" cy="160" r="150" fill="white" clip-path="url(#circleLeftClip)" />
+                        </svg>
+
+                        <!-- Content Overlay -->
+                        <div class="absolute inset-0 flex items-center justify-between px-[10%] md:px-[15%]">
+                            <!-- App Store (Left) -->
+                            <div class="flex flex-col items-center justify-center text-white w-1/3 z-20 pt-4 md:pt-0">
+                                <i class="fab fa-apple text-2xl md:text-5xl mb-1 md:mb-3"></i>
+                                <span class="font-bold text-xs md:text-xl text-center leading-tight mb-1">App Store</span>
+                                <span class="text-lg md:text-3xl font-bold" id="ios-counter">0</span>
+                            </div>
+
+                            <!-- Total (Center) -->
+                            <div class="flex flex-col items-center justify-center w-1/3 z-30 pt-4 md:pt-0">
+                                <p class="text-gray-500 text-[8px] md:text-sm uppercase tracking-wider font-bold mb-0.5 md:mb-1">Total</p>
+                                <span class="text-xl md:text-5xl font-bold text-tuwanx-black" id="download-counter">200+</span>
+                            </div>
+
+                            <!-- Play Store (Right) -->
+                            <div class="flex flex-col items-center justify-center text-tuwanx-black w-1/3 z-20 pt-4 md:pt-0">
+                                <i class="fab fa-google-play text-xl md:text-4xl mb-1 md:mb-3"></i>
+                                <span class="font-bold text-xs md:text-xl text-center leading-tight mb-1">Play Store</span>
+                                <span class="text-lg md:text-3xl font-bold" id="android-counter">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Section 2: How It Works -->
     <section id="how-it-works" class="section bg-white relative overflow-hidden">
         <div class="absolute top-20 -left-20 w-60 h-60 bg-tuwanx-gold/5 rounded-full blur-3xl"></div>
@@ -280,6 +334,7 @@
                     <div class="md:w-1/2 mb-8 md:mb-0">
                         <h2 class="text-3xl md:text-4xl font-bold mb-4">Get the <span class="text-gradient">Tuwanx App</span></h2>
                         <p class="text-lg text-gray-600 mb-6">Download our app to discover designers, create custom requests, and track your orders on the go.</p>
+                        
                         <div class="flex space-x-4">
                             <button class="bg-black text-white px-6 py-3 rounded-xl font-medium flex items-center voluminous-shadow hover:transform hover:-translate-y-1 transition-transform">
                                 <i class="fab fa-apple text-2xl mr-2"></i>
@@ -341,6 +396,87 @@
             fadeElements.forEach(element => {
                 fadeInObserver.observe(element);
             });
+
+            // Download Counter Logic
+            const counterElement = document.getElementById('download-counter');
+            if (counterElement) {
+                // Set start date to February 6, 2026 (Today's date from environment context is 2026-02-06)
+                // Using a fixed date ensures consistent counting for all users
+                const startDate = new Date('2026-02-06T00:00:00'); 
+                const baseCount = 200;
+                const growthRate = 0.25; // 25% daily increase
+
+                const now = new Date();
+                const timeDiff = now - startDate;
+                // Calculate days passed (floored to keep it stable per day)
+                // If we want it to update in real-time within the day, we'd use fractional days
+                // But "daily" usually implies step changes. Let's use fractional for a smoother feel if desired, 
+                // but requirement says "increasing by 25% daily", which can mean discrete.
+                // Let's stick to discrete days for "daily" growth.
+                
+                let daysPassed = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                daysPassed = Math.max(0, daysPassed); // Ensure no negative days
+
+                // Formula: Future Value = Present Value * (1 + rate)^n
+                const currentCount = Math.floor(baseCount * Math.pow(1 + growthRate, daysPassed));
+
+                // Calculate split (60% Android [3/5], 40% iOS)
+                const androidCount = Math.round(currentCount * 0.6);
+                const iosCount = currentCount - androidCount;
+
+                // Animate the number counting up
+                const duration = 2000; // 2 seconds
+                const frameDuration = 1000 / 60; // 60fps
+                const totalFrames = Math.round(duration / frameDuration);
+                const easeOutQuad = t => t * (2 - t);
+                
+                // Elements for charts
+                const iosCounterEl = document.getElementById('ios-counter');
+                const androidCounterEl = document.getElementById('android-counter');
+                const iosBarEl = document.getElementById('ios-bar');
+                const androidBarEl = document.getElementById('android-bar');
+
+                let frame = 0;
+                const animateCount = () => {
+                    frame++;
+                    const progress = easeOutQuad(frame / totalFrames);
+                    const currentDisplayed = Math.round(currentCount * progress);
+                    
+                    if (counterElement) {
+                        counterElement.textContent = currentDisplayed.toLocaleString() + '+';
+                    }
+
+                    if (iosCounterEl) {
+                        iosCounterEl.textContent = Math.round(iosCount * progress).toLocaleString();
+                    }
+                    if (androidCounterEl) {
+                        androidCounterEl.textContent = Math.round(androidCount * progress).toLocaleString();
+                    }
+                    
+                    if (frame < totalFrames) {
+                        requestAnimationFrame(animateCount);
+                    } else {
+                        counterElement.textContent = currentCount.toLocaleString() + '+';
+                        if (iosCounterEl) iosCounterEl.textContent = iosCount.toLocaleString();
+                        if (androidCounterEl) androidCounterEl.textContent = androidCount.toLocaleString();
+                    }
+                };
+                
+                // Start animation when element is in view
+                const counterObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateCount();
+                            // Animate bars removed since we are using Venn circles now
+                            // if (iosBarEl) iosBarEl.style.height = '60%';
+                            // if (androidBarEl) androidBarEl.style.height = '40%';
+                            counterObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                counterObserver.observe(counterElement);
+            }
             
             // Progress bar
             const progressBar = document.getElementById('progress');
