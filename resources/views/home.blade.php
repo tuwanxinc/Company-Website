@@ -436,6 +436,16 @@
                 const iosBarEl = document.getElementById('ios-bar');
                 const androidBarEl = document.getElementById('android-bar');
 
+                function formatNumber(num) {
+                    if (num >= 1000000) {
+                        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'm';
+                    }
+                    if (num >= 1000) {
+                        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+                    }
+                    return num.toString();
+                }
+
                 let frame = 0;
                 const animateCount = () => {
                     frame++;
@@ -443,22 +453,22 @@
                     const currentDisplayed = Math.round(currentCount * progress);
                     
                     if (counterElement) {
-                        counterElement.textContent = currentDisplayed.toLocaleString() + '+';
+                        counterElement.textContent = formatNumber(currentDisplayed) + '+';
                     }
 
                     if (iosCounterEl) {
-                        iosCounterEl.textContent = Math.round(iosCount * progress).toLocaleString();
+                        iosCounterEl.textContent = formatNumber(Math.round(iosCount * progress));
                     }
                     if (androidCounterEl) {
-                        androidCounterEl.textContent = Math.round(androidCount * progress).toLocaleString();
+                        androidCounterEl.textContent = formatNumber(Math.round(androidCount * progress));
                     }
                     
                     if (frame < totalFrames) {
                         requestAnimationFrame(animateCount);
                     } else {
-                        counterElement.textContent = currentCount.toLocaleString() + '+';
-                        if (iosCounterEl) iosCounterEl.textContent = iosCount.toLocaleString();
-                        if (androidCounterEl) androidCounterEl.textContent = androidCount.toLocaleString();
+                       counterElement.textContent = formatNumber(currentCount) + '+';
+                        if (iosCounterEl) iosCounterEl.textContent = formatNumber(iosCount);
+                        if (androidCounterEl) androidCounterEl.textContent = formatNumber(androidCount);
                     }
                 };
                 
