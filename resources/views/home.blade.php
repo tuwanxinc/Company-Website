@@ -80,10 +80,10 @@
     </section>
     
     <!-- Section 1.5: Download Charts -->
-    <section class="section bg-white py-20 relative overflow-hidden">
+    <section class="bg-white py-12 md:py-20 relative overflow-hidden">
         <div class="container mx-auto px-6">
             <div class="flex flex-col items-center justify-center fade-in">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 md:mb-20">Growing <span class="text-gradient">Community</span></h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-20">Growing <span class="text-gradient">Community</span></h2>
                 
                 <div class="w-full max-w-4xl relative mx-auto">
                     <!-- Venn Diagram SVG Background -->

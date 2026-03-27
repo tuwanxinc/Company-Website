@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Fix for shared hosting where public path is public_html
         if (is_dir(base_path('../public_html'))) {
-            $this->app->usePublicPath(base_path('../public_html'));
+            app()->usePublicPath(base_path('../public_html'));
         }
     }
 

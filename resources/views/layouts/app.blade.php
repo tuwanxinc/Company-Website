@@ -234,6 +234,7 @@
         
         .text-gradient {
             background: linear-gradient(135deg, #000000, #000000);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -241,8 +242,6 @@
         .gold-glow {
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
-        
-        @yield('extra-styles')
     </style>
 </head>
 <body class="bg-white text-tuwanx-black">
