@@ -404,7 +404,7 @@
                 // Using a fixed date ensures consistent counting for all users
                 const startDate = new Date('2026-02-06T00:00:00'); 
                 const baseCount = 200;
-                const growthRate = 0.25; // 25% daily increase
+                const growthRate = 0.10; // 10% daily increase
 
                 const now = new Date();
                 const timeDiff = now - startDate;
@@ -438,11 +438,13 @@
 
                 function formatNumber(num) {
                     if (num >= 1000000) {
-                        return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'm';
+                        return Math.floor(num / 1000000) + 'm+';
                     }
+
                     if (num >= 1000) {
-                        return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+                        return Math.floor(num / 1000) + 'k+';
                     }
+
                     return num.toString();
                 }
 
@@ -453,7 +455,7 @@
                     const currentDisplayed = Math.round(currentCount * progress);
                     
                     if (counterElement) {
-                        counterElement.textContent = formatNumber(currentDisplayed) + '+';
+                        counterElement.textContent = formatNumber(currentDisplayed);
                     }
 
                     if (iosCounterEl) {
@@ -466,7 +468,7 @@
                     if (frame < totalFrames) {
                         requestAnimationFrame(animateCount);
                     } else {
-                       counterElement.textContent = formatNumber(currentCount) + '+';
+                       counterElement.textContent = formatNumber(currentCount);
                         if (iosCounterEl) iosCounterEl.textContent = formatNumber(iosCount);
                         if (androidCounterEl) androidCounterEl.textContent = formatNumber(androidCount);
                     }
