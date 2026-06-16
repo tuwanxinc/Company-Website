@@ -19,8 +19,8 @@
         <a href="#download" class="nav-link">Download</a>
     </div>
     <div class="hidden md:flex items-center space-x-4">
-        <a href="https://app.tuwanx.com/login" class="btn-outline px-4 py-2 rounded-full font-medium">Log In</a>
-        <a href="https://app.tuwanx.com/register" class="btn-gold px-4 py-2 rounded-full font-medium">Sign Up</a>
+        <a href="#download" class="btn-outline px-4 py-2 rounded-full font-medium">Log In</a>
+        <a href="#download" class="btn-gold px-4 py-2 rounded-full font-medium">Sign Up</a>
     </div>
 @endsection
 
@@ -34,8 +34,8 @@
             <a href="#testimonials" class="text-2xl font-semibold py-2 border-b border-gray-100">Testimonials</a>
             <a href="#download" class="text-2xl font-semibold py-2 border-b border-gray-100">Download</a>
             <div class="flex flex-col space-y-4 pt-4">
-                <a href="https://app.tuwanx.com/login" class="btn-outline px-4 py-3 rounded-full font-medium text-lg text-center">Log In</a>
-                <a href="https://app.tuwanx.com/register" class="btn-gold px-4 py-3 rounded-full font-medium text-lg text-center">Sign Up</a>
+                <a href="#download" class="btn-outline px-4 py-3 rounded-full font-medium text-lg text-center">Log In</a>
+                <a href="#download" class="btn-gold px-4 py-3 rounded-full font-medium text-lg text-center">Sign Up</a>
             </div>
         </div>
     </div>
@@ -65,8 +65,8 @@
                 <h1 class="text-4xl md:text-6xl font-bold mb-6">Custom Fashion, <span class="text-gradient">Made for You</span></h1>
                 <p class="text-lg text-gray-600 mb-8">Connect with talented fashion designers to create unique, personalized clothing for your special moments.</p>
                 <div class="flex space-x-4">
-                    <button class="btn-gold px-6 py-3 rounded-lg font-semibold text-lg">Find Designers</button>
-                    <button class="btn-outline px-6 py-3 rounded-lg font-semibold text-lg">Learn More</button>
+                    <a href="#download" class="btn-gold px-6 py-3 rounded-lg font-semibold text-lg inline-block text-center">Find Designers</a>
+                    <a href="{{ route('about') }}" class="btn-outline px-6 py-3 rounded-lg font-semibold text-lg inline-block text-center">Learn More</a>
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center fade-in floating-element">
@@ -343,13 +343,13 @@
                                     <div class="text-lg">App Store</div>
                                 </div>
                             </button>
-                            <button class="bg-black text-white px-6 py-3 rounded-xl font-medium flex items-center voluminous-shadow hover:transform hover:-translate-y-1 transition-transform">
+                            <a href="https://play.google.com/store/apps/details?id=com.tx.Tuwanx&pcampaignid=web_share" target="_blank" rel="noopener" class="bg-black text-white px-6 py-3 rounded-xl font-medium flex items-center voluminous-shadow hover:transform hover:-translate-y-1 transition-transform">
                                 <i class="fab fa-google-play text-xl mr-2"></i>
                                 <div class="text-left">
                                     <div class="text-xs">Get it on</div>
                                     <div class="text-lg">Google Play</div>
                                 </div>
-                            </button>
+                            </a>
                         </div>
                     </div>
                     <div class="md:w-1/2 flex justify-center floating-element">
@@ -402,23 +402,19 @@
             if (counterElement) {
                 // Set start date to February 6, 2026 (Today's date from environment context is 2026-02-06)
                 // Using a fixed date ensures consistent counting for all users
-                const startDate = new Date('2026-02-06T00:00:00'); 
+                const startDate = new Date('2026-02-06T00:00:00');
                 const baseCount = 200;
-                const growthRate = 0.10; // 10% daily increase
+                const dailyIncrease = 200; // add 200 users per day
+                const maxCount = 1000000; // cap counter at 1 Million+
 
                 const now = new Date();
                 const timeDiff = now - startDate;
                 // Calculate days passed (floored to keep it stable per day)
-                // If we want it to update in real-time within the day, we'd use fractional days
-                // But "daily" usually implies step changes. Let's use fractional for a smoother feel if desired, 
-                // but requirement says "increasing by 25% daily", which can mean discrete.
-                // Let's stick to discrete days for "daily" growth.
-                
                 let daysPassed = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
                 daysPassed = Math.max(0, daysPassed); // Ensure no negative days
 
-                // Formula: Future Value = Present Value * (1 + rate)^n
-                const currentCount = Math.floor(baseCount * Math.pow(1 + growthRate, daysPassed));
+                // Linear growth: base + 200 users per day, capped at 1 Million+
+                const currentCount = Math.min(maxCount, baseCount + dailyIncrease * daysPassed);
 
                 // Calculate split (60% Android [3/5], 40% iOS)
                 const androidCount = Math.round(currentCount * 0.6);
@@ -437,15 +433,16 @@
                 const androidBarEl = document.getElementById('android-bar');
 
                 function formatNumber(num) {
+                    // Once we reach 1 Million, keep the counter at "1 Million+"
                     if (num >= 1000000) {
-                        return Math.floor(num / 1000000) + 'm+';
+                        return '1 Million+';
                     }
 
                     if (num >= 1000) {
-                        return Math.floor(num / 1000) + 'k+';
+                        return Math.floor(num / 1000) + 'K+';
                     }
 
-                    return num.toString();
+                    return num + '+';
                 }
 
                 let frame = 0;

@@ -471,18 +471,7 @@
             <p class="text-base md:text-lg text-gray-600 text-center mb-8 md:mb-12 max-w-2xl mx-auto">Our headquarters are located in the heart of Wilmington, Delaware.</p>
             
             <div class="bg-gradient-to-br from-tuwanx-gold/5 to-tuwanx-gold/10 rounded-2xl md:rounded-3xl p-6 md:p-8 voluminous-shadow">
-                <div class="h-64 sm:h-80 md:h-96 rounded-xl md:rounded-2xl overflow-hidden relative">
-                    <!-- Map Placeholder - In a real implementation, you would embed a Google Map here -->
-                    <div class="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                        <div class="text-center p-4">
-                            <i class="fas fa-map-marked-alt text-tuwanx-gold text-3xl md:text-5xl mb-3 md:mb-4"></i>
-                            <p class="text-gray-700 font-medium text-sm md:text-base">Interactive Map of Our Delaware Location</p>
-                            <p class="text-gray-600 mt-1 md:mt-2 text-xs md:text-sm">123 Fashion Avenue, Wilmington, DE 19801</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mt-6 md:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                     <div class="bg-white p-4 md:p-6 rounded-xl md:rounded-2xl card-shadow text-center">
                         <i class="fas fa-clock text-tuwanx-gold text-xl md:text-2xl mb-3 md:mb-4"></i>
                         <h3 class="font-semibold text-sm md:text-base mb-2">Business Hours</h3>
@@ -516,7 +505,7 @@
                 <p class="text-base md:text-lg lg:text-xl text-gray-600 mb-6 md:mb-10">Join thousands of customers who have discovered the perfect custom clothing experience with Tuwanx.</p>
                 <div class="flex flex-col xs:flex-row justify-center space-y-3 xs:space-y-0 xs:space-x-4 btn-group-responsive">
                     <button class="btn-gold px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg btn-responsive">Start Your Project</button>
-                    <button class="btn-outline px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg btn-responsive">Browse Designers</button>
+                    <a href="{{ route('home') }}#download" class="btn-outline px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold text-base md:text-lg btn-responsive inline-block text-center">Browse Designers</a>
                 </div>
             </div>
         </div>

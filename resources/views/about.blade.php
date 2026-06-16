@@ -313,7 +313,6 @@
                 <p class="text-base xs:text-lg md:text-xl text-gray-600 mb-6 md:mb-10">Discover the passion and vision behind Tuwanx, the platform revolutionizing custom fashion.</p>
                 <div class="flex flex-col xs:flex-row justify-center space-y-3 xs:space-y-0 xs:space-x-4 btn-group-responsive">
                     <a href="#mission" class="btn-gold px-5 py-3 rounded-lg font-semibold text-base btn-responsive">Our Mission</a>
-                    <a href="#team" class="btn-outline px-5 py-3 rounded-lg font-semibold text-base btn-responsive">Meet Our Team</a>
                 </div>
             </div>
         </div>

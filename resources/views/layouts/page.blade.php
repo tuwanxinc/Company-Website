@@ -134,8 +134,8 @@
                 <a href="{{ route('contact') }}" class="nav-link @yield('active-contact')">Contact</a>
             </div>
             <div class="hidden md:flex items-center space-x-4">
-                <a href="https://app.tuwanx.com/login" class="btn-outline px-4 py-2 rounded-full font-medium">Log In</a>
-                <a href="https://app.tuwanx.com/register" class="btn-gold px-4 py-2 rounded-full font-medium">Sign Up</a>
+                <a href="{{ route('home') }}#download" class="btn-outline px-4 py-2 rounded-full font-medium">Log In</a>
+                <a href="{{ route('home') }}#download" class="btn-gold px-4 py-2 rounded-full font-medium">Sign Up</a>
             </div>
             
             <!-- Mobile Menu Button -->
@@ -156,8 +156,8 @@
                     <a href="{{ route('about') }}" class="text-2xl font-semibold py-2 border-b border-gray-100">About</a>
                     <a href="{{ route('contact') }}" class="text-2xl font-semibold py-2 border-b border-gray-100">Contact</a>
                     <div class="flex flex-col space-y-4 pt-4">
-                        <a href="https://app.tuwanx.com/login" class="btn-outline px-4 py-3 rounded-full font-medium text-lg text-center">Log In</a>
-                        <a href="https://app.tuwanx.com/register" class="btn-gold px-4 py-3 rounded-full font-medium text-lg text-center">Sign Up</a>
+                        <a href="{{ route('home') }}#download" class="btn-outline px-4 py-3 rounded-full font-medium text-lg text-center">Log In</a>
+                        <a href="{{ route('home') }}#download" class="btn-gold px-4 py-3 rounded-full font-medium text-lg text-center">Sign Up</a>
                     </div>
                 </div>
             </div>
